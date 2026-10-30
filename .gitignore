@@ -1,0 +1,10 @@
+node_modules/
+*.db
+.env
+.vercel/
+.railway/
+.vscode/
+.DS_Store
+Thumbs.db
+backend/twilio-config.js
+backend/nexmo-config.js

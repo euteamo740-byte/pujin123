@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pujin Store - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Pujin Store</h2>
+                <p class="tagline">Virtual SIM Market</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" onclick="switchTab('dashboard'); return false;">
+                    <span class="icon">🏠</span> Dashboard
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('orders'); return false;">
+                    <span class="icon">📦</span> Order Nomor
+                </a>
+                <a href="otp-inbox.html" class="nav-item" onclick="return false;">
+                    <span class="icon">📬</span> OTP Inbox
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('profile'); return false;">
+                    <span class="icon">👤</span> Profil
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('settings'); return false;">
+                    <span class="icon">⚙️</span> Pengaturan
+                </a>
+                <a href="index.html" class="nav-item logout" onclick="logout(); return false;">
+                    <span class="icon">🚪</span> Keluar
+                </a>
+            </nav>
+
+            <button class="btn-topup-sidebar" onclick="goToTopup()">💰 TOP UP</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-dashboard">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <span id="userDisplay" class="user-info"></span>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="dashboard-content">
+                <!-- Dashboard Tab -->
+                <section id="dashboard-tab" class="tab-section active">
+                    <!-- Balance Card -->
+                    <div class="balance-card">
+                        <div class="balance-info">
+                            <p class="balance-label">Saldo Anda</p>
+                            <h2 class="balance-amount">Rp<span id="balance">0</span></h2>
+                        </div>
+                        <button class="btn-topup-card" onclick="goToTopup()">+ TOP UP</button>
+                    </div>
+
+                    <!-- Transaction Summary -->
+                    <div class="transaction-summary">
+                        <div class="summary-card success">
+                            <h3>Berhasil</h3>
+                            <p class="summary-count" id="count-success">0</p>
+                        </div>
+                        <div class="summary-card pending">
+                            <h3>Pending</h3>
+                            <p class="summary-count" id="count-pending">0</p>
+                        </div>
+                        <div class="summary-card failed">
+                            <h3>Batal</h3>
+                            <p class="summary-count" id="count-failed">0</p>
+                        </div>
+                    </div>
+
+                    <!-- Available Numbers -->
+                    <div class="section-container">
+                        <h3 class="section-title">🔥 Nomor Virtual Tersedia</h3>
+                        <div class="numbers-grid" id="trendingNumbers"></div>
+                    </div>
+
+                    <!-- Layanan Populer -->
+                    <div class="section-container">
+                        <h3 class="section-title">📱 Layanan Populer (Indonesia)</h3>
+                        <div class="service-tiles" id="servicePopuler"></div>
+                    </div>
+
+                    <!-- Announcements -->
+                    <div class="section-container">
+                        <h3 class="section-title">📢 Pengumuman</h3>
+                        <div id="announcements" class="announcements-list"></div>
+                    </div>
+                </section>
+
+                <!-- Orders Tab -->
+                <section id="orders-tab" class="tab-section">
+                    <h2>Nomor Saya</h2>
+                    <div id="user-numbers" class="numbers-owned-list">
+                        <p style="text-align: center; color: #999;">Belum ada nomor yang dibeli</p>
+                    </div>
+                </section>
+
+                <!-- Activity Tab -->
+                <section id="activity-tab" class="tab-section">
+                    <h2>Riwayat Transaksi</h2>
+                    <div id="activity-list" class="activity-list">
+                        <p style="text-align: center; color: #999;">Belum ada transaksi</p>
+                    </div>
+                </section>
+
+                <!-- Profile Tab -->
+                <section id="profile-tab" class="tab-section">
+                    <h2>Profil Saya</h2>
+                    <div class="profile-card">
+                        <div class="profile-info">
+                            <p><strong>Username:</strong> <span id="profile-username">-</span></p>
+                            <p><strong>Saldo:</strong> <span id="profile-balance">Rp0</span></p>
+                            <p><strong>Member Sejak:</strong> <span id="profile-joined">-</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Tab -->
+                <section id="settings-tab" class="tab-section">
+                    <h2>Pengaturan</h2>
+                    <div class="settings-list">
+                        <button class="setting-item" onclick="alert('Fitur coming soon!')">
+                            🔐 Ubah Password
+                        </button>
+                        <button class="setting-item" onclick="alert('Fitur coming soon!')">
+                            🔔 Notifikasi
+                        </button>
+                        <button class="setting-item danger" onclick="if(confirm('Hapus akun? Ini tidak bisa dibatalkan!')) { alert('Coming soon'); }">
+                            ⚠️ Hapus Akun
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

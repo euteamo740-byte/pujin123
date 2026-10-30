@@ -1,0 +1,8 @@
+{
+  "name": "pujin-store-frontend",
+  "version": 1,
+  "buildCommand": "echo 'Static site - no build needed'",
+  "outputDirectory": ".",
+  "installCommand": "echo 'No dependencies'",
+  "framework": null
+}

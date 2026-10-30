@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual SIM - Daftar Akun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <h1>Virtual SIM</h1>
+            
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('register')">Daftar</button>
+                <button class="tab-btn" onclick="switchTab('login')">Masuk</button>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerTab" class="tab-content active">
+                <p class="subtitle">Buat Akun Baru</p>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="regUsername">Username</label>
+                        <input 
+                            type="text" 
+                            id="regUsername" 
+                            name="username" 
+                            placeholder="Masukkan username" 
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="regPassword" 
+                            name="password" 
+                            placeholder="Minimal 4 karakter" 
+                            minlength="4"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regConfirmPassword">Konfirmasi Password</label>
+                        <input 
+                            type="password" 
+                            id="regConfirmPassword" 
+                            name="confirmPassword" 
+                            placeholder="Ulangi password" 
+                            minlength="4"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-register">Buat Akun Baru</button>
+                </form>
+
+                <div id="regMessage" class="message"></div>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginTab" class="tab-content">
+                <p class="subtitle">Masuk ke Akun</p>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">Username</label>
+                        <input 
+                            type="text" 
+                            id="loginUsername" 
+                            name="username" 
+                            placeholder="Masukkan username" 
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            name="password" 
+                            placeholder="Masukkan password" 
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-register">Masuk</button>
+                </form>
+
+                <div id="loginMessage" class="message"></div>
+            </div>
+
+            <p class="footer-text">
+                <small>Data akun disimpan di browser lokal Anda</small>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

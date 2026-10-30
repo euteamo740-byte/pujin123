@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual SIM - Top Up Saldo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Top Up Saldo</h1>
+                <button class="btn-back" onclick="goBack()">← Kembali</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="topup-container">
+                <!-- Pilih Nominal -->
+                <section class="topup-section">
+                    <h2>Pilih Nominal Top Up</h2>
+                    <div class="nominal-grid">
+                        <div class="nominal-card" onclick="selectNominal(10000)">
+                            <div class="nominal-amount">Rp10.000</div>
+                            <div class="nominal-bonus">+500 Bonus</div>
+                        </div>
+                        <div class="nominal-card" onclick="selectNominal(25000)">
+                            <div class="nominal-amount">Rp25.000</div>
+                            <div class="nominal-bonus">+1.250 Bonus</div>
+                        </div>
+                        <div class="nominal-card" onclick="selectNominal(50000)">
+                            <div class="nominal-amount">Rp50.000</div>
+                            <div class="nominal-bonus">+2.500 Bonus</div>
+                        </div>
+                        <div class="nominal-card" onclick="selectNominal(100000)">
+                            <div class="nominal-amount">Rp100.000</div>
+                            <div class="nominal-bonus">+5.000 Bonus</div>
+                        </div>
+                        <div class="nominal-card" onclick="selectNominal(250000)">
+                            <div class="nominal-amount">Rp250.000</div>
+                            <div class="nominal-bonus">+12.500 Bonus</div>
+                        </div>
+                        <div class="nominal-card" onclick="selectNominal(500000)">
+                            <div class="nominal-amount">Rp500.000</div>
+                            <div class="nominal-bonus">+25.000 Bonus</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Payment Method -->
+                <section class="topup-section" id="paymentSection" style="display: none;">
+                    <h2>Metode Pembayaran</h2>
+                    
+                    <div class="payment-method active" id="danaMethod">
+                        <div class="payment-header" onclick="togglePayment('dana')">
+                            <h3>💳 DANA</h3>
+                            <span>✓</span>
+                        </div>
+                        <div class="payment-details">
+                            <p>Transfer ke nomor DANA berikut:</p>
+                            <div class="dana-info">
+                                <div class="dana-number" id="danaNumber">082171659342</div>
+                                <button class="btn-copy" onclick="copyToClipboard('082171659342')">Salin</button>
+                            </div>
+                            <p style="margin-top: 15px; font-size: 12px; color: #666;">
+                                Setelah transfer, klik tombol "Konfirmasi Pembayaran" di bawah
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="payment-method" id="qrisMethod">
+                        <div class="payment-header" onclick="togglePayment('qris')">
+                            <h3>📱 QRIS Dana</h3>
+                            <span>✓</span>
+                        </div>
+                        <div class="payment-details" style="display: none;">
+                            <p>Scan QR Code DANA berikut:</p>
+                            <div class="qris-container">
+                                <img src="assets/dana-qr.jpg" alt="QR Code DANA" class="qris-image">
+                            </div>
+                            <p style="margin-top: 15px; font-size: 12px; color: #666; text-align: center;">
+                                Nomor DANA: 082171659342
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Summary & Confirm -->
+                <section class="topup-section" id="summarySection" style="display: none;">
+                    <h2>Ringkasan Top Up</h2>
+                    <div class="summary-box">
+                        <div class="summary-row">
+                            <span>Nominal Top Up:</span>
+                            <span id="summaryAmount" class="summary-value">Rp0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Bonus:</span>
+                            <span id="summaryBonus" class="summary-value">Rp0</span>
+                        </div>
+                        <div class="summary-row" style="border-top: 1px solid #ddd; padding-top: 10px; margin-top: 10px;">
+                            <span style="font-weight: 600;">Total Saldo Tambah:</span>
+                            <span id="summaryTotal" class="summary-value" style="font-weight: 600; color: #28a745;">Rp0</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-confirm" onclick="confirmPayment()">✓ Konfirmasi Pembayaran</button>
+                    <button class="btn-cancel" onclick="cancelTopup()">Batal</button>
+
+                    <div id="topupMessage" class="message"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="topup.js"></script>
+</body>
+</html>

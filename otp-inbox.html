@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Inbox - Pujin Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Pujin Store</h2>
+                <p class="tagline">Virtual SIM Market</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">🏠</span> Dashboard
+                </a>
+                <a href="dashboard.html" class="nav-item active" onclick="switchTab('orders'); return false;">
+                    <span class="icon">📦</span> Order Nomor
+                </a>
+                <a href="#" class="nav-item" onclick="return false;">
+                    <span class="icon">📊</span> Activity
+                </a>
+                <a href="#" class="nav-item" onclick="return false;">
+                    <span class="icon">👤</span> Profil
+                </a>
+                <a href="#" class="nav-item" onclick="return false;">
+                    <span class="icon">⚙️</span> Pengaturan
+                </a>
+                <a href="index.html" class="nav-item logout" onclick="logout(); return false;">
+                    <span class="icon">🚪</span> Keluar
+                </a>
+            </nav>
+
+            <button class="btn-topup-sidebar" onclick="goToTopup()">💰 TOP UP</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-dashboard">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>📬 OTP Inbox</h1>
+                </div>
+                <div class="header-right">
+                    <span id="userDisplay" class="user-info"></span>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="dashboard-content">
+                <!-- Select Number -->
+                <div class="section-container">
+                    <h3 class="section-title">Pilih Nomor</h3>
+                    <select id="numberSelect" onchange="loadOTPForNumber()" class="number-selector">
+                        <option value="">-- Pilih nomor yang dibeli --</option>
+                    </select>
+                </div>
+
+                <!-- OTP List -->
+                <div class="section-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 class="section-title" style="margin: 0;">📬 SMS/OTP Masuk</h3>
+                        <button class="btn-refresh" onclick="loadOTPForNumber()">🔄 Refresh</button>
+                    </div>
+                    <div id="otpList" class="otp-list">
+                        <p style="text-align: center; color: #999;">Pilih nomor untuk melihat OTP</p>
+                    </div>
+                </div>
+
+                <!-- Test Simulate OTP (Admin) -->
+                <div class="section-container" id="adminSection" style="display: none; background: #fff9e6; border-left: 4px solid #ffc107;">
+                    <h3 class="section-title">🧪 Simulate OTP (Testing)</h3>
+                    <p style="color: #666; margin-bottom: 15px;">Untuk testing: inject OTP ke nomor terpilih</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <input type="text" id="simulateCode" placeholder="Masuk kode OTP (misal: 123456)" class="input-field">
+                        <button class="btn-simulate" onclick="simulateOTP()">📨 Inject OTP</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="otp-inbox.js"></script>
+</body>
+</html>

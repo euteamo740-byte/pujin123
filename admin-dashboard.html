@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Pujin Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" style="background: linear-gradient(135deg, #dc3545 0%, #a71930 100%);">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p class="tagline">Pujin Store Management</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" onclick="switchTab('overview'); return false;">
+                    <span class="icon">📊</span> Overview
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('users'); return false;">
+                    <span class="icon">👥</span> Users
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('transactions'); return false;">
+                    <span class="icon">💳</span> Transactions
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('numbers'); return false;">
+                    <span class="icon">📱</span> Numbers
+                </a>
+                <a href="#" class="nav-item" onclick="switchTab('otp-inject'); return false;">
+                    <span class="icon">🧪</span> OTP Inject
+                </a>
+                <a href="index.html" class="nav-item logout" onclick="logout(); return false;">
+                    <span class="icon">🚪</span> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-dashboard">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>⚙️ Admin Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <span class="user-info">👤 Admin</span>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="dashboard-content">
+                
+                <!-- Overview Tab -->
+                <section id="overview-tab" class="tab-section active">
+                    <h2>📊 Overview</h2>
+                    <div class="transaction-summary">
+                        <div class="summary-card success">
+                            <h3>Total Users</h3>
+                            <p class="summary-count" id="stat-users">0</p>
+                        </div>
+                        <div class="summary-card pending">
+                            <h3>Total Numbers Sold</h3>
+                            <p class="summary-count" id="stat-numbers">0</p>
+                        </div>
+                        <div class="summary-card failed">
+                            <h3>Total Revenue</h3>
+                            <p class="summary-count" id="stat-revenue" style="font-size: 18px;">Rp0</p>
+                        </div>
+                    </div>
+
+                    <div class="section-container">
+                        <h3 class="section-title">📈 Recent Transactions</h3>
+                        <div id="recentTx" style="max-height: 400px; overflow-y: auto;">
+                            <p style="text-align: center; color: #999;">Loading...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Tab -->
+                <section id="users-tab" class="tab-section">
+                    <h2>👥 Manage Users</h2>
+                    <div class="section-container">
+                        <input type="text" id="userSearch" placeholder="Cari username..." class="input-field" style="margin-bottom: 15px;" onkeyup="loadUsers()">
+                        <div id="usersList" style="max-height: 600px; overflow-y: auto;">
+                            <p style="text-align: center; color: #999;">Loading...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Tab -->
+                <section id="transactions-tab" class="tab-section">
+                    <h2>💳 All Transactions</h2>
+                    <div class="section-container">
+                        <div id="transactionsList" style="max-height: 600px; overflow-y: auto;">
+                            <p style="text-align: center; color: #999;">Loading...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Numbers Tab -->
+                <section id="numbers-tab" class="tab-section">
+                    <h2>📱 Number Inventory</h2>
+                    <div class="section-container">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                            <div style="text-align: center; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                                <p style="margin: 0; color: #666; font-size: 12px;">Available</p>
+                                <p style="margin: 5px 0 0 0; font-size: 24px; font-weight: 700; color: #28a745;" id="stat-available">0</p>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                                <p style="margin: 0; color: #666; font-size: 12px;">Owned</p>
+                                <p style="margin: 5px 0 0 0; font-size: 24px; font-weight: 700; color: #007bff;" id="stat-owned">0</p>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                                <p style="margin: 0; color: #666; font-size: 12px;">Total</p>
+                                <p style="margin: 5px 0 0 0; font-size: 24px; font-weight: 700; color: #666;" id="stat-total">0</p>
+                            </div>
+                        </div>
+                        <div id="numbersList" style="max-height: 600px; overflow-y: auto;">
+                            <p style="text-align: center; color: #999;">Loading...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- OTP Inject Tab -->
+                <section id="otp-inject-tab" class="tab-section">
+                    <h2>🧪 Inject OTP (Testing)</h2>
+                    <div class="section-container">
+                        <p style="color: #666; margin-bottom: 20px;">Inject OTP manual ke nomor untuk testing WhatsApp verification</p>
+                        
+                        <div style="display: grid; gap: 15px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Select Number</label>
+                                <select id="injectNumber" class="input-field">
+                                    <option value="">-- Pilih nomor --</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">OTP Code</label>
+                                <input type="text" id="injectCode" placeholder="Misal: 123456" class="input-field" maxlength="6">
+                            </div>
+
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Message (optional)</label>
+                                <textarea id="injectMessage" class="input-field" placeholder="WhatsApp message..." rows="3"></textarea>
+                            </div>
+
+                            <button class="btn-confirm" onclick="injectOTP()" style="width: 100%; cursor: pointer;">📨 Inject OTP</button>
+                        </div>
+
+                        <div id="injectMessage" style="margin-top: 20px;"></div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
